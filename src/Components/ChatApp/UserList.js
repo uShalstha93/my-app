@@ -4,6 +4,8 @@ const UserList = () => {
 
     const [aUser, setAUser] = useState([])
     const [msgUser, setMsgUser] = useState('')
+    const [typeMsg, setTypeMsg] = useState('')
+    const [sendTypeMsg, setSendTypeMsg] = useState('')
 
     const users = () => {
         fetch("http://localhost:2500/users")
@@ -15,6 +17,10 @@ const UserList = () => {
 
     const userMsg = (oName) => {
         setMsgUser("I am " + oName)
+    }
+
+    const sendMsg = () => {
+        setSendTypeMsg(typeMsg)
     }
 
     return (
@@ -51,13 +57,17 @@ const UserList = () => {
                                     <p style={{fontSize: 'large'}}>{msgUser}</p>
                                 </tr>
                                 <td className="td">
-                                    <h5>Chat Messages Will Be Here</h5>
+                                    <h5>{sendTypeMsg}</h5>
                                 </td>
                             </tbody>
                         </table>
                         <div>
-                            <input type="text" />
-                            <button className="btn btn-outline-primary btn-sm" style={{ margin: '5px' }}><img src="https://www.iconpacks.net/icons/2/free-send-mail-icon-2574-thumb.png" alt="send" height="20px" width="20px" /></button>
+                            <input type="text" onKeyUp={(e) => setTypeMsg(e.target.value)} />
+                            <button className="btn btn-outline-primary btn-sm"
+                            onClick={()=> sendMsg()}
+                            style={{ margin: '5px' }}>
+                                <img src="https://www.iconpacks.net/icons/2/free-send-mail-icon-2574-thumb.png" alt="send" height="20px" width="20px" />
+                            </button>
                         </div>
                     </div>
                 </div>
