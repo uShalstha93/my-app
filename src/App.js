@@ -12,7 +12,7 @@ const App = () => {
   
   return (
   <>
-    <div className="h1"><h1><i>WELCOME TO MERN SESSION</i></h1></div>
+    <div className="header"><h1><i>WELCOME TO MERN SESSION</i></h1></div>
     <div><UserList /></div>
     {/* <div><LikedCount /></div> */}
     {/* <div><ImagePosition /></div> */}

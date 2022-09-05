@@ -6,6 +6,33 @@
     justify-content: center;
 }
 
+.header {
+    display: flex;
+    margin: 10px;
+    background-image: linear-gradient(to right, orange, rgb(247, 216, 159));
+    justify-content: center;
+    width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-radius: 10px;
+}
+
+.userlist {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-image: linear-gradient(to right, orange, rgb(247, 216, 159));
+    width: 100%;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: large;
+}
+
+.userlist > h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: x-large;
+}
 
 .column {
     float: left;
@@ -21,13 +48,6 @@
     clear: both;
     background-color: rgb(169, 190, 207);
     text-align: center;
-}
-
-.h1 {
-    text-align: center;
-    color: rgb(43, 0, 255);
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color: rgb(237, 200, 100);
 }
 
 .h3 {
