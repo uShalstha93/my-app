@@ -31,11 +31,9 @@ const Login = () => {
         let errPassword = "";
         if (!values2) {
             errPassword = "Password is Required!";
-        } else if (values2.length < 4) {
-            errPassword = "Password must be greater than 4 characters!"
-        } else if (values2.length > 10) {
-            errPassword = "Password cannot exceed more than 10 character"
-        }
+        } else if (values2.length < 10) {
+            errPassword = "Password must be atleast of 10 character!"
+        } 
         return errPassword
     }
 
@@ -65,7 +63,7 @@ const Login = () => {
                     <label class="form-check-label">Remember Me</label>
                 </div><br />
                 <div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
                 </div>
             </form>
         </div>

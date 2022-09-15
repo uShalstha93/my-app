@@ -1,0 +1,71 @@
+body {
+    background: rgb(2, 0, 36);
+    background: radial-gradient(
+      circle,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(30, 54, 59, 1) 0%,
+      rgba(93, 93, 116, 1) 100%
+    );
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: aliceblue;
+  }
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    width: 99%;
+    border-radius: 5px;
+    margin: 5px;
+    background: linear-gradient(to right, orange, rgb(245, 203, 125));
+  }
+
+  .sidebar {
+    float: left;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    margin: 5px;
+    width: 25%;
+    height: 90vh;
+    border-radius: 5px;
+    padding: 10px;
+    background: linear-gradient(to right, orange, rgb(245, 203, 125));
+  }
+  
+  .body {
+    float: inline-start;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    margin: 5px;
+    width: 72%;
+    height: 90vh;
+    border-radius: 5px;
+    padding: 10px;
+    background: linear-gradient(to right, rgb(245, 203, 125), orange);
+  }
+
+  .msgbox {
+    position: absolute;
+    background: rgba(173, 216, 230, 0.516);
+    width: 60%;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    margin: 35px;
+    /* align-items: center; */
+    padding: 10px;
+    color: black;
+    border-radius: 5px;
+  }
+
+  .input {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    margin: 39%;
+  }
+
