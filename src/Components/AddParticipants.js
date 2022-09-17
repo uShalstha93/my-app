@@ -11,14 +11,17 @@ const AddParticipants = () => {
     const [randomInt, setRandomInt] = useState(null)
     // const [getData, setGetData] = useState(false)
 
-    //display participants list in UI
-    useEffect(() => {
-        // if (getData === true) {
+    const fetchUser = () => {
         fetch("http://localhost:2500/participants")
             .then((res) => res.json())
             .then(data => {
-                setUserlist(data)
+                setUserlist(data.detail)
             })
+    }
+    //display participants list in UI
+    useEffect(() => {
+        // if (getData === true) {
+        fetchUser()
         // }
         // else {
         //     console.log("hello")
@@ -50,6 +53,7 @@ const AddParticipants = () => {
                 //     setResult(data.body)
                 // })
                 .then(alert("participants added!"))
+                .then(res => fetchUser())
             // .then(setGetData(true))
             // .then(setGetName(""))
         }
@@ -67,10 +71,26 @@ const AddParticipants = () => {
             })
         }
         fetch("http://localhost:2500/participants", updateOption)
+            .then(alert("Winner List Updated!!"))
         // .then((res) => res.json())
         // .then(data => {
         //     setResult(data.body)
         // })
+    }
+
+    //delete participants
+    const deleteParticipants = (delName) => {
+        const delOption = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "name": delName
+            })
+        }
+        fetch("http://localhost:2500/participants", delOption)
+            .then(alert("Participant Deleted!!"))
+            .then(res => fetchUser())
+
     }
 
     //generate random number after clicking button
@@ -117,16 +137,21 @@ const AddParticipants = () => {
                             {userlist.length > 0 ? userlist.map((item, index) => {
                                 return (
                                     <tr>
-                                        <td><button style={{ backgroundColor: index === randomInt ? "red" : null }}>{item.name}</button></td>
+                                        <td><button className='btn btn-secondary' style={{ backgroundColor: index === randomInt ? "red" : null }}>{item.name}</button></td>
+                                        <td><button className='btn btn-danger' onClick={() => deleteParticipants(item.name)}>Delete</button></td>
                                     </tr>
                                 )
                             }) : "Loading..."}
                         </div>
                     </div>
-                    {`Winner is ${randomInt}`}
                     <div className='column-1'>
-                        <button className='btn btn-primary' onClick={() => luckyWinner()}>LUCKY DRAW</button><br/><br/>
-                        <button className='btn btn-primary' onClick={() => updateParticipants()}>CONFIRM</button>
+                        <div>
+                            {`Winner is ${randomInt}`}
+                        </div>
+                        <div>
+                            <button className='btn btn-primary' onClick={() => luckyWinner()}>LUCKY DRAW</button><br /><br />
+                            <button className='btn btn-primary' onClick={() => updateParticipants()}>CONFIRM UPDATE</button>
+                        </div>
                     </div>
                 </div>
             </div>
