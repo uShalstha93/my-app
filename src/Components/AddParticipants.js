@@ -122,6 +122,9 @@ const AddParticipants = () => {
                     <br />
                     Lottery No: <input type="number" placeholder="Enter Lottery Number" onKeyUp={(e) => setGetLotteryNo(e.target.value)} />
                     <br />
+                    <br />
+                    Upload Image: <input type="file" name="avatar" placeholder="select img" />
+                    <br />
                     {errmsg}
                     <br />
                     <br />
