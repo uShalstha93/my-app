@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
+// import img from '../uploadImages/Pika.jpg'
 
 const AddParticipants = () => {
 
@@ -151,7 +152,7 @@ const AddParticipants = () => {
                             return (
                                 <tr>
                                     <td><button className='btn btn-secondary' style={{ backgroundColor: index === randomInt ? "red" : null }}>{item.name}</button></td>
-                                    <td><img src={item.filePath} /></td>
+                                    <td><img src={item.filePath} alt="avatar" width="50px" height="50px" /></td>
                                     <td><button className='btn btn-danger' onClick={() => deleteParticipants(item.name)}>Delete</button></td>
                                 </tr>
                             )
