@@ -5,6 +5,7 @@ const AddParticipants = () => {
 
     const [getName, setGetName] = useState("")
     const [getLotteryNo, setGetLotteryNo] = useState("")
+    const [getImg, setGetImg] = useState("")
     // const [result, setResult] = useState([])
     const [userlist, setUserlist] = useState([])
     const [errmsg, setErrmsg] = useState("")
@@ -32,27 +33,31 @@ const AddParticipants = () => {
     const addParticipants = () => {
 
         //variable assign for POST
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "name": getName,
-                "lotteryNo": getLotteryNo,
-                "isWinner": false
-            })
-        };
+        const formData = new FormData()
+        formData.append("avatar", getImg)
+        formData.append("name", getName)
+        formData.append("lotteryNo", getLotteryNo)
+        formData.append("isWinner", false)
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: formData
+        // };
         //name & lottery Number validation
         if (getName === "" && getLotteryNo === "") {
             return setErrmsg("Please Enter Name & Lottery No!!")
         }
         else {
             //POST in mongoDB
-            fetch("http://localhost:2500/participants", requestOptions)
+            fetch("http://localhost:2500/participants", {
+                method: 'POST',
+                body: formData
+            })
                 // .then((res) => res.json())
                 // .then(data => {
                 //     setResult(data.body)
                 // })
-                .then(alert("participants added!"))
+                // .then(alert("participants added!"))
                 .then(res => fetchUser())
             // .then(setGetData(true))
             // .then(setGetName(""))
@@ -108,6 +113,14 @@ const AddParticipants = () => {
         }
     }
 
+    const handleChangeImg = (event) => {
+        // console.log(event.target.files[0])
+        // console.log(URL.createObjectURL(event.target.files[0]))
+        const imgURL = event.target.files[0]
+        // console.log(imgURL)
+        setGetImg(imgURL)
+    }
+
     return (
 
         <div>
@@ -115,39 +128,37 @@ const AddParticipants = () => {
                 <div>
                     <h1>SUPER ADMIN</h1>
                 </div>
-                <br />
-                <div>
-                    Name: <input type="text" placeholder="Enter Your Name" onKeyUp={(e) => setGetName(e.target.value)} />
-                    <br />
-                    <br />
-                    Lottery No: <input type="number" placeholder="Enter Lottery Number" onKeyUp={(e) => setGetLotteryNo(e.target.value)} />
-                    <br />
-                    <br />
-                    Upload Image: <input type="file" name="avatar" placeholder="select img" />
-                    <br />
-                    {errmsg}
-                    <br />
-                    <br />
-                </div>
-                <button className="btn btn-outline-primary" onClick={() => addParticipants()}>ADD PARTICIPANT</button>
-                <br />
-                <br />
                 <div className='row'>
-                    <div className='column'>
-                        <h5>PARTICIPANTS LIST</h5>
-                        <div>
-                            <tr>Name</tr>
-                            {userlist.length > 0 ? userlist.map((item, index) => {
-                                return (
-                                    <tr>
-                                        <td><button className='btn btn-secondary' style={{ backgroundColor: index === randomInt ? "red" : null }}>{item.name}</button></td>
-                                        <td><button className='btn btn-danger' onClick={() => deleteParticipants(item.name)}>Delete</button></td>
-                                    </tr>
-                                )
-                            }) : "Loading..."}
-                        </div>
+                    <div className='col'>
+                        Name: <input type="text" placeholder="Enter Your Name" onKeyUp={(e) => setGetName(e.target.value)} />
+                        <br />
+                        <br />
+                        Lottery No: <input type="number" placeholder="Enter Lottery Number" onKeyUp={(e) => setGetLotteryNo(e.target.value)} />
+                        <br />
+                        <br />
+                        Upload Image: <input type="file" name="avatar" placeholder="select img" onChange={handleChangeImg} />
+                        <br />
+                        {errmsg}
+                        <br />
+                        <br />
+                        <button className="btn btn-outline-primary" onClick={() => addParticipants()}>ADD PARTICIPANT</button>
                     </div>
-                    <div className='column-1'>
+                    <div className='col'>
+                        <h5>PARTICIPANTS LIST</h5>
+                        {/* <div> */}
+                        <tr>Name</tr>
+                        {userlist.length > 0 ? userlist.map((item, index) => {
+                            return (
+                                <tr>
+                                    <td><button className='btn btn-secondary' style={{ backgroundColor: index === randomInt ? "red" : null }}>{item.name}</button></td>
+                                    <td><img src={item.filePath} /></td>
+                                    <td><button className='btn btn-danger' onClick={() => deleteParticipants(item.name)}>Delete</button></td>
+                                </tr>
+                            )
+                        }) : "Loading..."}
+                        {/* </div> */}
+                    </div>
+                    <div className='col'>
                         <div>
                             {`Winner is ${randomInt}`}
                         </div>

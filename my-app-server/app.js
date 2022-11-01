@@ -77,8 +77,9 @@ app.listen(port, () => {
 
 app.post('/participants', upload, async (req, res, next) => {
     try {
-        // console.log(req)
+        
         req.body.filePath = req.file.path
+        // console.log(req.body)
         Users.create(req.body)
         res.json({
             message: "participants added with Image!!",
@@ -147,7 +148,7 @@ app.delete('/participants', async (req, res) => {
 })
 
 
-
+// image upload sample
 // app.post('/profile', upload, (req, res, next) => {
 //     // req.file is the `avatar` file
 //     // req.body will hold the text fields, if there were any
