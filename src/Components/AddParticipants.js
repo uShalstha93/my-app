@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-// import img from '../uploadImages/Pika.jpg'
+// import '../../src/uploadImages'
 
 const AddParticipants = () => {
 
@@ -149,10 +149,13 @@ const AddParticipants = () => {
                         {/* <div> */}
                         <tr>Name</tr>
                         {userlist.length > 0 ? userlist.map((item, index) => {
+                                // console.log(item.filePath)
+                                // const z = '../uploadImages/'+ item.filePath
+                                // console.log(z)
                             return (
-                                <tr>
+                                <tr key={item.name}>
                                     <td><button className='btn btn-secondary' style={{ backgroundColor: index === randomInt ? "red" : null }}>{item.name}</button></td>
-                                    <td><img src={item.filePath} alt="avatar" width="50px" height="50px" /></td>
+                                    <td><img src={require('../uploadImages/' + item.filePath)} alt="avatar" width="50px" height="50px" /></td>
                                     <td><button className='btn btn-danger' onClick={() => deleteParticipants(item.name)}>Delete</button></td>
                                 </tr>
                             )

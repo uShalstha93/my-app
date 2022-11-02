@@ -77,9 +77,8 @@ app.listen(port, () => {
 
 app.post('/participants', upload, async (req, res, next) => {
     try {
-        
-        req.body.filePath = req.file.path
-        // console.log(req.body)
+        req.body.filePath = req.file.filename
+        console.log(req.body)
         Users.create(req.body)
         res.json({
             message: "participants added with Image!!",
